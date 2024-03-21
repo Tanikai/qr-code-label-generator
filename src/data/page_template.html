@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <style>
+        .label-height {
+            height: {{ row_height }}mm;
+        }
+        .label-width {
+            width: {{ column_width }}mm;
+        }
+        .qr-code {
+            margin: {{ qr_code_margin }}mm;
+            height: {{ qr_code_height }}mm;
+        }
+        .text-area {
+            height: {{ qr_code_height }}mm;
+            margin-top: -{{ row_height - qr_code_margin }}mm;
+            margin-left: {{ qr_code_height + (2*qr_code_margin) }}mm;
+        }
+        .label {
+            overflow: hidden;
+            font-size: 7mm;
+            font-family: "Fira Code";
+        }
+    </style>
+</head>
+
+
+<body>
+    <table>
+        {% for row in range(num_rows) %}
+        <tr class="label-height">
+            {% for column in range(num_columns) %}
+            <td class="label-height">
+                <div class="container label-height label-width">
+                    <img class="qr-code" src="{{qr_code(labels[row * num_columns + column].asset_url)}}" />
+                    <div class="text-area">
+                        <p class="label">
+                            {{ labels[row * num_columns + column].asset_id }}
+                        <p/>
+                    </div>
+                </div>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

@@ -1,0 +1,3 @@
+blabel
+weasyprint
+jinja2
